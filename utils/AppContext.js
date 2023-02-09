@@ -37,16 +37,19 @@ export const AppProvider = (props) => {
     setPrompt(data.prompt);
 
     try {
-      const response = await openai.createImage({
-        prompt: data.prompt,
-        n: 6,
-        size: '512x512',
-
-        onUploadProgress: ({ loaded, total }) => {
-          let progress = ((loaded / total) * 100).toFixed(2);
-          setProgress(progress);
+      const response = await openai.createImage(
+        {
+          prompt: data.prompt,
+          n: 6,
+          size: '512x512',
         },
-      });
+        {
+          onUploadProgress: ({ loaded, total }) => {
+            let progress = ((loaded / total) * 100).toFixed(2);
+            setProgress(progress);
+          },
+        },
+      );
 
       if (response.status === 200) {
         setProgress(0);

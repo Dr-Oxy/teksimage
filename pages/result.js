@@ -5,6 +5,8 @@ import { useContext, useState } from 'react';
 
 import { AppContext } from '../utils/AppContext';
 
+import { saveAs } from 'file-saver';
+
 export default function Result() {
   const { results, prompt } = useContext(AppContext);
 
@@ -18,6 +20,10 @@ export default function Result() {
     setFocusImg({
       url: item.url,
     });
+  };
+
+  const downloadImage = () => {
+    saveAs(focusImg.url, 'openaiImage.png');
   };
 
   return (
@@ -128,6 +134,7 @@ export default function Result() {
             </p>
 
             <button
+              onClick={downloadImage}
               className="p-3 text-white text-sm w-full mx-auto capitalize rounded-md 
               bg-[#177AE5]"
             >

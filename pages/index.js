@@ -11,7 +11,7 @@ export default function Home() {
     useContext(AppContext);
 
   return (
-    <div>
+    <div className="bg-linear-pattern bg-no-repeat bg-center">
       <Head>
         <title>
           TeksImage || Create astounding art in different forms of media in a
@@ -58,7 +58,7 @@ export default function Home() {
               <div className="text-red-400"> Field cannot be empty</div>
             )}
             {isLoading ? (
-              <div className="mt-5 w-full mx-auto bg-gray-100 border border-gray-400 ">
+              <div className="mt-5 w-full mx-auto bg-transparent border border-gray-400 ">
                 <div
                   className="bg-[#E08304] text-white p-3 text-sm"
                   style={{ width: `${progress}%` }}

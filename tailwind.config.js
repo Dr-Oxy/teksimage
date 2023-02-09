@@ -6,7 +6,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'linear-pattern': "url('/assets/lineargradient.png')",
+      },
+    },
   },
   plugins: [],
 };

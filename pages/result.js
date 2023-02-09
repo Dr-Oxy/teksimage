@@ -64,7 +64,7 @@ export default function Result() {
 
         <div className=" max-w-[960px] mx-auto mt-8 px-4 lg:px-0 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section>
-            <div className="cursor-pointer bg-gray-100 ">
+            <div className="cursor-pointer bg-gray-100 shadow-md">
               <Image
                 className=""
                 src={focusImg.url}
@@ -74,7 +74,7 @@ export default function Result() {
               />
             </div>
 
-            <div className="mt-5 flex items-center">
+            <div className="mt-5 flex items-center justify-end">
               <button
                 onClick={() =>
                   setFocusImg({
@@ -82,7 +82,7 @@ export default function Result() {
                     liked: !focusImg.liked,
                   })
                 }
-                className="py-2 px-4 w-fit flex items-center text-black text-sm  capitalize rounded 
+                className="py-2 px-4 w-fit flex items-center text-[#636363] text-sm  capitalize rounded 
               bg-[#EDEDED]"
               >
                 <svg
@@ -107,7 +107,7 @@ export default function Result() {
 
               <button
                 onClick={() => setIsLiked(!isLiked)}
-                className="ml-6 py-2 px-4 w-fit flex items-center text-black text-sm  capitalize rounded 
+                className="ml-6 py-2 px-4 w-fit flex items-center text-[#636363] text-sm  capitalize rounded 
               bg-[#EDEDED]"
               >
                 <svg

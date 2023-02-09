@@ -10,9 +10,7 @@
 }
 
 body {
-
-  background: white url('/assets/lineargradient.png') no-repeat center;
-  background-size: cover;
+  background-color: white;
   font-family: 'Open sans', sans-serif;
 }
 

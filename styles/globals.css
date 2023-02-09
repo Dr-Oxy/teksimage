@@ -10,8 +10,9 @@
 }
 
 body {
-  background-color: white;
-  /* background-image: linear-gradient(to top right, white, #71acea57); */
+
+  background: white url('/assets/lineargradient.png') no-repeat center;
+  background-size: cover;
   font-family: 'Open sans', sans-serif;
 }
 

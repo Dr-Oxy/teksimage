@@ -143,7 +143,7 @@ export default function Result() {
 
             <Link href="/">
               <button
-                className="p-3 text-black text-sm w-full mx-auto capitalize rounded-md 
+                className="p-3 mt-4 text-black text-sm w-full mx-auto capitalize rounded-md 
               bg-transparent"
               >
                 go back

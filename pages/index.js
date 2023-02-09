@@ -40,7 +40,7 @@ export default function Home() {
 
           <form onSubmit={generatePrompt} className="mt-8 lg:w-[450px] mx-auto">
             <input
-              className="w-full bg-white border border-[#8F9499] text-sm lg:text-base p-2 rounded"
+              className="w-full bg-white border border-[#8F9499] text-base p-3 rounded"
               type="text"
               placeholder="Write here..."
               {...register('prompt', { required: true, maxLength: 1000 })}

@@ -1,66 +1,14 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useContext } from 'react';
+
+import { AppContext } from '../utils/AppContext';
 
 import { teksimageLogo, imageIcon } from '@/public/assets';
 
 export default function Home() {
-  const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [generated, setGenerated] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  function resetState() {
-    setTimeout(() => {
-      reset();
-      setGenerated(false);
-    }, 5000);
-  }
-
-  const generatePrompt = handleSubmit(async (data) => {
-    setIsLoading(true);
-
-    try {
-      const response = await openai.createImage({
-        prompt: data.prompt,
-        n: 1,
-        size: '512x512',
-
-        onUploadProgress: ({ loaded, total }) => {
-          let progress = ((loaded / total) * 100).toFixed(2);
-          setProgress(progress);
-        },
-      });
-
-      if (response.status === 200) {
-        setProgress(0);
-        setResults(response.data.data);
-        setIsLoading(false);
-
-        setGenerated(true);
-
-        resetState();
-      }
-    } catch (error) {
-      setIsLoading(false);
-      setProgress(0);
-      setGenerated(false);
-
-      if (error.response) {
-        console.log(error.response.status, error.response.data);
-      } else {
-        console.log(error.message);
-      }
-    }
-  });
+  const { register, errors, isLoading, generated, generatePrompt, progress } =
+    useContext(AppContext);
 
   return (
     <div>
@@ -72,14 +20,18 @@ export default function Home() {
       </Head>
 
       <main className="h-screen flex items-center justify-center">
-        <section className="max-w-[960px] mx-auto text-center">
-          <Image className="mx-auto" src={teksimageLogo} alt="teksimage logo" />
+        <section className="max-w-[960px] mx-auto lg:text-center px-4 lg:px-0">
+          <Image
+            className="lg:mx-auto"
+            src={teksimageLogo}
+            alt="teksimage logo"
+          />
 
-          <h1 className="font-bold text-5xl text-[#212120]">
+          <h1 className="font-bold text-xl lg:text-5xl text-[#212120]">
             Text to Image Generator
           </h1>
 
-          <p className="text-[#444] text-base lg:w-[85%] mx-auto mt-5">
+          <p className="text-[#444] text-sm lg:text-base w-full lg:w-[85%] lg:mx-auto mt-5">
             Create astounding art in different forms of media in a matter of
             seconds using nothing but your own words. Create stunning graphics
             without any code being written by utilising cutting-edge text to
@@ -88,7 +40,7 @@ export default function Home() {
 
           <form onSubmit={generatePrompt} className="mt-8 lg:w-[450px] mx-auto">
             <input
-              className="w-full bg-white border border-[#8F9499] text-base p-2 rounded"
+              className="w-full bg-white border border-[#8F9499] text-sm lg:text-base p-2 rounded"
               type="text"
               placeholder="Write here..."
               {...register('prompt', { required: true, maxLength: 1000 })}

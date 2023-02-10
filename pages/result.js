@@ -11,19 +11,22 @@ export default function Result() {
   const { results, prompt } = useContext(AppContext);
 
   const [focusImg, setFocusImg] = useState({
-    url: results[0]?.url,
+    b64_json: results[0]?.b64_json,
     liked: false,
   });
   const [isLiked, setIsLiked] = useState(false);
 
   const changeFocus = (item) => {
     setFocusImg({
-      url: item.url,
+      b64_json: item.b64_json,
     });
   };
 
   const downloadImage = () => {
-    saveAs(focusImg.url, 'openaiImage.png');
+    saveAs(
+      `data:image/png;base64,${focusImg.b64_json}`,
+      `${prompt?.substr(0, 20)}.png`,
+    );
   };
 
   return (
@@ -44,12 +47,14 @@ export default function Result() {
                   onClick={() => changeFocus(item)}
                   key={index}
                   className={`cursor-pointer bg-gray-100 ${
-                    focusImg.url === item.url ? 'border-4 border-blue-500' : ''
+                    focusImg.b64_json === item.b64_json
+                      ? 'border-4 border-blue-500'
+                      : ''
                   }`}
                 >
                   <Image
                     className=""
-                    src={item.url}
+                    src={`data:image/png;base64,${item.b64_json}`}
                     alt={`${index} open ai generated image`}
                     height={512}
                     width={512}
@@ -67,7 +72,7 @@ export default function Result() {
             <div className="cursor-pointer bg-gray-100 shadow-md">
               <Image
                 className=""
-                src={focusImg.url}
+                src={`data:image/png;base64,${focusImg.b64_json}`}
                 alt={`open ai generated image`}
                 height={512}
                 width={512}
@@ -132,7 +137,8 @@ export default function Result() {
             <p className="text-[#444] text-sm lg:text-base w-full mb-10">
               {prompt}
             </p>
-
+            {/* 
+            <a href={`data:image/png;base64,${focusImg.b64_json}`} download> */}
             <button
               onClick={downloadImage}
               className="p-3 text-white text-sm w-full mx-auto capitalize rounded-md 
@@ -140,6 +146,7 @@ export default function Result() {
             >
               download
             </button>
+            {/* </a> */}
 
             <Link href="/">
               <button

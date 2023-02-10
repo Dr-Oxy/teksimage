@@ -42,6 +42,7 @@ export const AppProvider = (props) => {
           prompt: data.prompt,
           n: 6,
           size: '512x512',
+          response_format: 'b64_json',
         },
         {
           onUploadProgress: ({ loaded, total }) => {
